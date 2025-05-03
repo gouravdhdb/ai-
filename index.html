@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head><title>My AI Chatbot</title></head>
+  <body>
+    <h1>ChatGPT Lite</h1>
+    <textarea id="input" placeholder="Type here..."></textarea>
+    <button onclick="send()">Send</button>
+    <pre id="response"></pre>
+
+    <script>
+      async function send() {
+        const prompt = document.getElementById('input').value;
+        const res = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+        const data = await res.json();
+        document.getElementById("response").textContent = data.reply;
+      }
+    </script>
+  </body>
+</html>
